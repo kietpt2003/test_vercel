@@ -2,22 +2,20 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const materialSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, 'Name required.'],
-        unique: true,
-        trim: true
+    account_id: {
+        type: Number
     },
-    description: {
-        type: String,
-        required: [true, 'Description required.'],
-        trim: true
+    limit: {
+        type: Number,
+    },
+    products: {
+        type: [String]
     }
 }, {
-    collection: 'material',
+    collection: 'accounts',
     versionKey: false
 });
 
-let Material = mongoose.model('material', materialSchema);
+let Material = mongoose.model('accounts', materialSchema);
 
 module.exports = Material;

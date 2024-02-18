@@ -16,25 +16,18 @@ export const getMaterialByPage = async (pageReq) => {
 
         // Get the data for the current page
         const url = process.env.URL_DB;
-        await mongoose.connect(url, { family: 4, dbName: 'interiorConstruction' });
-        totalMaterials = await Material.countDocuments();
+        await mongoose.connect(url, { family: 4, dbName: 'sample_analytics' });
+        // totalMaterials = await Material.countDocuments();
 
-        if (totalMaterials > 0) {
-            currentPageData = await Material.find({}).skip(startIndex).limit(endIndex);
-            return {
-                data: currentPageData,
-                pagination: {
-                    page: page,
-                    itemsPerPage: itemsPerPage,
-                    totalItems: totalMaterials,
-                },
-            };
-        } else {
-            return {
-                status: 400,
-                error: 'No data',
-            }
-        }
+        currentPageData = await Material.find({ account_id: 371138 }).skip(startIndex).limit(endIndex);
+        return {
+            data: currentPageData,
+            pagination: {
+                page: page,
+                itemsPerPage: itemsPerPage,
+                totalItems: totalMaterials,
+            },
+        };
     } catch (error) {
         console.error(error);
         return {
